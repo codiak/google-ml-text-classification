@@ -39,7 +39,7 @@ def load_imdb_sentiment_analysis_dataset(data_path, seed=123):
         Download and uncompress archive from:
         http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz
     """
-    imdb_data_path = os.path.join(data_path, 'data')
+    imdb_data_path = os.path.join(data_path, 'aclImdb')
 
     # Load the training data
     train_texts = []
