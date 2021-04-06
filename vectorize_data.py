@@ -59,11 +59,14 @@ def ngram_vectorize(train_texts, train_labels, val_texts):
     }
     vectorizer = TfidfVectorizer(**kwargs)
 
+    # todense() - Change required for newer Tensorflow
+    # https://github.com/tensorflow/tensorflow/issues/25980
+
     # Learn vocabulary from training texts and vectorize training texts.
-    x_train = vectorizer.fit_transform(train_texts)
+    x_train = vectorizer.fit_transform(train_texts).todense()
 
     # Vectorize validation texts.
-    x_val = vectorizer.transform(val_texts)
+    x_val = vectorizer.transform(val_texts).todense()
 
     # Select top 'k' of the vectorized features.
     selector = SelectKBest(f_classif, k=min(TOP_K, x_train.shape[1]))
@@ -73,6 +76,7 @@ def ngram_vectorize(train_texts, train_labels, val_texts):
 
     x_train = x_train.astype('float32')
     x_val = x_val.astype('float32')
+
     return x_train, x_val
 
 

@@ -36,7 +36,7 @@ data_tuple = load_data.load_imdb_sentiment_analysis_dataset(data_dir)
 # N-gram Tokenization into unigrams and bigrams
 # Vectorize using tf-idf encoding
 # Apply feature selection (top 20,000 features)
-data_vectors = vectorize_data.ngram_vectorize(train_texts, train_labels, val_texts)
+# data_vectors = vectorize_data.ngram_vectorize(train_texts, train_labels, val_texts)
 
 # Step 4: Build, Train, and Evaluate
 # ----------------------------------

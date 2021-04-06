@@ -74,7 +74,7 @@ def train_ngram_model(data,
         loss = 'binary_crossentropy'
     else:
         loss = 'sparse_categorical_crossentropy'
-    optimizer = tf.keras.optimizers.Adam(lr=learning_rate)
+    optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
     model.compile(optimizer=optimizer, loss=loss, metrics=['acc'])
 
     # Create callback for early stopping on validation loss. If the loss does
