@@ -1,3 +1,8 @@
+## About
+
+A working example version of the Google ML Text Classification guide, with up to date packages:
+https://developers.google.com/machine-learning/guides/text-classification
+
 # Text Classification
 
 This repository contains end-to-end tutorial-like code samples to help solve
