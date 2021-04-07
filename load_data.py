@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 
 
-def load_imdb_sentiment_analysis_dataset(data_path, seed=123):
+def load_imdb_sentiment_analysis_dataset(data_path, seed=123, max_samples=50000):
     """Loads the Imdb movie reviews sentiment analysis dataset.
 
     # Arguments
@@ -40,14 +40,17 @@ def load_imdb_sentiment_analysis_dataset(data_path, seed=123):
         http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz
     """
     imdb_data_path = os.path.join(data_path, 'aclImdb')
+    per_split_max = max_samples/4;
 
     # Load the training data
     train_texts = []
     train_labels = []
     for category in ['pos', 'neg']:
         train_path = os.path.join(imdb_data_path, 'train', category)
+        samples_processed = 0
         for fname in sorted(os.listdir(train_path)):
-            if fname.endswith('.txt'):
+            samples_processed += 1
+            if fname.endswith('.txt') and samples_processed < per_split_max:
                 with open(os.path.join(train_path, fname)) as f:
                     train_texts.append(f.read())
                 train_labels.append(0 if category == 'neg' else 1)
@@ -57,8 +60,10 @@ def load_imdb_sentiment_analysis_dataset(data_path, seed=123):
     test_labels = []
     for category in ['pos', 'neg']:
         test_path = os.path.join(imdb_data_path, 'test', category)
+        samples_processed = 0
         for fname in sorted(os.listdir(test_path)):
-            if fname.endswith('.txt'):
+            samples_processed += 1
+            if fname.endswith('.txt') and samples_processed < per_split_max:
                 with open(os.path.join(test_path, fname)) as f:
                     test_texts.append(f.read())
                 test_labels.append(0 if category == 'neg' else 1)

@@ -17,7 +17,8 @@ Extract contents into /data/aclImdb
 
 # Load the dataset
 data_dir = './data/'
-data_tuple = load_data.load_imdb_sentiment_analysis_dataset(data_dir)
+# NOTE: Only pulling in 5000 samples to allow running locally
+data_tuple = load_data.load_imdb_sentiment_analysis_dataset(data_dir, seed=150, max_samples=5000)
 # (train_texts, train_labels), (val_texts, val_labels) = data_tuple
 
 # The two charts in the course
@@ -41,9 +42,9 @@ data_tuple = load_data.load_imdb_sentiment_analysis_dataset(data_dir)
 # -> Build mlp model included in train_ngram_model()
 # ----------------------------------
 
-LEARNING_RATE = 1e-1
+LEARNING_RATE = 1e-4
 EPOCHS = 100
-BATCH_SIZE = 16
+BATCH_SIZE = 128
 LAYERS = 2
 UNITS = 64
 DROPOUT_RATE = 0.2
