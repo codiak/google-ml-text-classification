@@ -18,19 +18,18 @@ Extract contents into /data/aclImdb
 # Load the dataset
 data_dir = './data/'
 data_tuple = load_data.load_imdb_sentiment_analysis_dataset(data_dir)
-(train_texts, train_labels), (val_texts, val_labels) = data_tuple
-# explore_data.get_num_words_per_sample(train_texts)
+# (train_texts, train_labels), (val_texts, val_labels) = data_tuple
 
 # The two charts in the course
 # explore_data.plot_frequency_distribution_of_ngrams(train_texts)
 # explore_data.plot_sample_length_distribution(train_texts)
 
+# Additional data exploring functions
+# explore_data.get_num_words_per_sample(train_texts)
 # explore_data.plot_class_distribution(train_labels)
 
-# Train
-# acc, loss = train_ngram_model.train_ngram_model(data)
-
 # Step 3: Prepare Data
+# -> Tokenization and vecotrization included in train_ngram_model()
 # --------------------
 
 # N-gram Tokenization into unigrams and bigrams
@@ -39,13 +38,14 @@ data_tuple = load_data.load_imdb_sentiment_analysis_dataset(data_dir)
 # data_vectors = vectorize_data.ngram_vectorize(train_texts, train_labels, val_texts)
 
 # Step 4: Build, Train, and Evaluate
+# -> Build mlp model included in train_ngram_model()
 # ----------------------------------
 
-LEARNING_RATE = 1e-3
-EPOCHS = 1000
-BATCH_SIZE = 128
+LEARNING_RATE = 1e-1
+EPOCHS = 100
+BATCH_SIZE = 16
 LAYERS = 2
 UNITS = 64
 DROPOUT_RATE = 0.2
-model_eval = train_ngram_model(data_tuple, LEARNING_RATE, EPOCHS,
+acc, loss = train_ngram_model(data_tuple, LEARNING_RATE, EPOCHS,
                               BATCH_SIZE, LAYERS, UNITS, DROPOUT_RATE)
